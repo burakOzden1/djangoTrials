@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
-from datetime import date
+from datetime import date, datetime
 
 
 data = {
@@ -17,7 +17,7 @@ db = {
             "description": "JavaScript Kurs açıklaması",
             "imageUrl": f"https://img-c.udemycdn.com/course/750x422/1662526_fc1c_3.jpg",
             "slug": "javascript-kursu",
-            "date": date(2022, 10, 10),
+            "date": datetime.now(),
             "isActive": True,
             "isUpdated": False,
         },
