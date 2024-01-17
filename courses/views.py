@@ -15,7 +15,7 @@ db = {
         {
             "title": "JavaScript Kursu",
             "description": "JavaScript Kurs açıklaması",
-            "imageUrl": f"https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.orientsoftware.com%2FThemes%2FOrientSoftwareTheme%2FContent%2FImages%2Fblog%2F2021-12-16%2Fwhat-can-you-do-with-javascript-thumb.jpg&tbnid=0DJPYqCoG9YlLM&vet=12ahUKEwj5rPrjkOWDAxW67rsIHZ7-DoYQMygEegQIARBR..i&imgrefurl=https%3A%2F%2Fwww.orientsoftware.com%2Fblog%2Fwhat-can-you-do-with-javascript%2F&docid=10gVE9fJYTx1rM&w=720&h=460&q=javascript%20images&client=opera&ved=2ahUKEwj5rPrjkOWDAxW67rsIHZ7-DoYQMygEegQIARBR",
+            "imageUrl": f"https://img-c.udemycdn.com/course/750x422/1662526_fc1c_3.jpg",
             "slug": "javascript-kursu",
             "date": date(2022, 10, 10),
             "is-active": True,
@@ -23,28 +23,34 @@ db = {
         {
             "title": "Python Kursu",
             "description": "Python Kurs açıklaması",
-            "imageUrl": f"https://www.google.com/imgres?imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D10223953689661794&tbnid=VrbT9cUet6n29M&vet=12ahUKEwjR6pT3kOWDAxUGhv0HHQ83A7wQMygKegQIARBC..i&imgrefurl=https%3A%2F%2Fwww.facebook.com%2Fgroups%2Fpython%2F&docid=8N2I3Jh-s9VSqM&w=1640&h=924&q=python%20images&client=opera&ved=2ahUKEwjR6pT3kOWDAxUGhv0HHQ83A7wQMygKegQIARBC",
+            "imageUrl": f"https://img-c.udemycdn.com/course/750x422/2463492_8344_3.jpg",
             "slug": "python-kursu",
             "date": date(2022, 9, 10),
-            "is-active": True,
+            "is-active": False,
         },
         {
             "title": "Web Geliştirme Kursu",
             "description": "Web Geliştirme açıklaması",
-            "imageUrl": f"https://www.google.com/imgres?imgurl=https%3A%2F%2Fmiro.medium.com%2Fv2%2Fresize%3Afit%3A1200%2F0*M4bxiCIjcTK-2Xr6.jpeg&tbnid=y-fKDYcldejyJM&vet=12ahUKEwjWn-mDkeWDAxVAo_0HHQc6BrsQMygAegQIARBL..i&imgrefurl=https%3A%2F%2Fjavascript.plainenglish.io%2F10-best-web-development-software-for-web-developer-4d349f486d2a&docid=PXI6084aRPqMQM&w=1200&h=630&q=web%20development%20images&client=opera&ved=2ahUKEwjWn-mDkeWDAxVAo_0HHQc6BrsQMygAegQIARBL",
+            "imageUrl": f"https://img-c.udemycdn.com/course/750x422/1258436_2dc3_4.jpg",
             "slug": "web-gelistirme-kursu",
             "date": date(2022, 8, 10),
             "is-active": True,
         },
     ],
-    "categories": ["Programlama", "Web Geliştirme", "Mobil Uygulamalar"]
+    "categories": [
+        {"id": 1, "name": "Programlama", "slug": "programlama"},
+        {"id": 2, "name": "Web Geliştirme", "slug": "web-gelistirme"},
+        {"id": 3, "name": "Mobil Uygulamalar", "slug": "mobil-uygulamalar"},
+    ]
 }
 
 
 def index(request):
-    category_list = list(data.keys())
+    kurslar = db["courses"]
+    kategoriler = db["categories"]
     context = dict(
-        categories = category_list,
+        categories = kategoriler,
+        courses = kurslar,
     )
     return render(request, 'courses/index.html', context)
 
