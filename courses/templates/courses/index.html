@@ -7,12 +7,17 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-3">
-                <!-- MENU -->
-                {% include 'courses/partials/_categories.html' %}
+
+                <!-- {% include 'courses/partials/_categories.html' %} -->
+
+
+                <div class="list-group">
+                    {% for category in categories %}
+                        <a href="{% url 'courses_by_category' category %}" class="list-group-item list-group-item-action">{{ category }}</a>
+                    {% endfor %}
+                </div>
             </div>
             <div class="col-9">
-                <!-- CONTENT -->
-
             </div>
         </div>
     </div>
