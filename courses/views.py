@@ -14,7 +14,7 @@ db = {
     "courses": [
         {
             "title": "JavaScript Kursu",
-            "description": "JavaScript Kurs açıklaması",
+            "description": "JavaScript Kurs açıklaması, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla nihil nam corrupti dolores exercitationem alias omnis recusandae quam id asperiores.",
             "imageUrl": f"1.jpg",
             "slug": "javascript-kursu",
             "date": datetime.now(),
@@ -23,7 +23,7 @@ db = {
         },
         {
             "title": "Python Kursu",
-            "description": "Python Kurs açıklaması",
+            "description": "Python Kurs açıklaması, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla nihil nam corrupti dolores exercitationem alias omnis recusandae quam id asperiores.",
             "imageUrl": f"2.jpg",
             "slug": "python-kursu",
             "date": date(2022, 9, 10),
@@ -32,7 +32,7 @@ db = {
         },
         {
             "title": "Web Geliştirme Kursu",
-            "description": "Web Geliştirme açıklaması",
+            "description": "Web Geliştirme Kurs açıklaması, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla nihil nam corrupti dolores exercitationem alias omnis recusandae quam id asperiores.",
             "imageUrl": f"3.jpg",
             "slug": "web-gelistirme-kursu",
             "date": date(2022, 8, 10),

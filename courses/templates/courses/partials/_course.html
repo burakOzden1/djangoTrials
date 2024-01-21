@@ -8,7 +8,7 @@
         <div class="col-8">
             <div class="card-body">
                 <h5 class="card-title">{{ course.title }}</h5>
-                <p class="card-text">{{ course.description }}</p>
+                <p class="card-text">{{ course.description|truncatewords:15 }}</p>
                 <span>
                     {% if course.isUpdated %}
                         <span class="badge bg-success">Güncellendi</span>
