@@ -49,6 +49,18 @@ db = {
 
 
 def index(request):
+     
+    kurslar = []
+    for kurs in db["courses"]:
+        if kurs["isActive"] == True:
+            kurslar.append(kurs)
+    # HTML icerisinde if yapisi kullanmak yerine views icerisinde basit bir dongu kurarak aktif olan linkleri bir listenin icine atabiliriz.
+
+    # list comprehensions:
+    kurslar = [course for course in db["courses"] if course["isActive"] == True]
+    # Ya da list comprehension ile aktif olan postlari kurslar adli bir liste icerisine alarak daha kompakt bir kod yapisi olusturduk
+
+
     kurslar = db["courses"]
     kategoriler = db["categories"]
     context = dict(
