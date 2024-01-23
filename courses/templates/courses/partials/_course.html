@@ -9,6 +9,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ course.title }}</h5>
                 <p class="card-text">{{ course.description|truncatewords:15 }}</p>
+                {% comment "Bu alan veri tabanimizda olmadigi icin kaldirdik" %}
                 <span>
                     {% if course.isUpdated %}
                         <span class="badge bg-success">Güncellendi</span>
@@ -17,8 +18,10 @@
 
                     {% endif %}
                 </span>
-                <p>{{ course.date|date:'d F D' }}</p>
+                {% endcomment %}
+                <p>{{ course.date|date:'SHORT_DATE_FORMAT' }}</p>
             </div>
         </div>
     </div>
 </div>
+
