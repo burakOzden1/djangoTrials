@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
 from datetime import date, datetime
 from .models import Course
+from .models import Category
 
 
 data = {
@@ -50,19 +51,9 @@ db = {
 
 
 def index(request):
-     
-    # kurslar = []
-    # for kurs in db["courses"]:
-    #     if kurs["isActive"] == True:
-    #         kurslar.append(kurs)
-    # HTML icerisinde if yapisi kullanmak yerine views icerisinde basit bir dongu kurarak aktif olan linkleri bir listenin icine atabiliriz.
-
-    # list comprehensions:
     kurslar = Course.objects.filter(isActive=1)
-    # Ya da list comprehension ile aktif olan postlari kurslar adli bir liste icerisine alarak daha kompakt bir kod yapisi olusturduk
 
-
-    kategoriler = db["categories"]
+    kategoriler = Category.objects.all()
     context = dict(
         categories = kategoriler,
         courses = kurslar,
