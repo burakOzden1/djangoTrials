@@ -6,7 +6,7 @@ from .views import index, details, getCoursesByCategory, getCoursesByCategoryId
 
 urlpatterns = [
     path('', index),   
-    path('<kurs_id>', details, name="course_details"),
+    path('<slug:slug>', details, name="course_details"),
     path('kategori/<int:category_id>', getCoursesByCategoryId),
     path('kategori/<str:category_name>', getCoursesByCategory, name='courses_by_category'), # link alanina tanimlananlardan farkli bir deger girilirse burada bulunan dinamik alan calisir. Bu satir hep en asagida olmak zorunda.
 ]
