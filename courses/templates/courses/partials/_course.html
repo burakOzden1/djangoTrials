@@ -7,7 +7,13 @@
         </div>
         <div class="col-8">
             <div class="card-body">
-                <h5 class="card-title">{{ course.title }}</h5>
+
+                <h5 class="card-title">
+                    <a href="{% url 'course_details' course.id %}" style="text-decoration:none">
+                        {{ course.title }}
+                    </a>
+                </h5>
+
                 <p class="card-text">{{ course.description|truncatewords:15 }}</p>
                 {% comment "Bu alan veri tabanimizda olmadigi icin kaldirdik" %}
                 <span>
