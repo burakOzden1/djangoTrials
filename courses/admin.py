@@ -9,7 +9,7 @@ class CourseAdmin(admin.ModelAdmin):
         "title", 
         "isActive",
         "slug",
-        "category",
+        # "category", # many to many iliskisi kurdugumuz icin bu satiri sildik.
     )
 
     list_display_links = (
@@ -25,7 +25,7 @@ class CourseAdmin(admin.ModelAdmin):
 
     list_filter = (
         "isActive",
-        "category",
+        # "category", # many to many iliskisi kurdugumuz icin bu satiri sildik.
     )
 
     list_editable = (
