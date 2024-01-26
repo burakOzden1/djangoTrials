@@ -15,6 +15,11 @@
                 {% include 'courses/partials/_categories.html' %}
             </div>
             <div class="col-9">
+                
+                {% if courses|length == 0 %}
+                    <div class="alert alert-warning">Kurs Bulunamadı.</div>
+                {% endif %}
+
                 {% for course in courses %}
                     {% if course.isActive %}
                         {% include 'courses/partials/_course.html' %}

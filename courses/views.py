@@ -79,24 +79,24 @@ def details(request, slug):
 # def getCoursesByCategory(request, category):
 #     return HttpResponse(f"{ category } kategorisindeki kurs listesi")
 
-def getCoursesByCategory(request, category_name):
-    try:
-        category_text = data[category_name]
-        context = dict(
-            category= category_name,
-            category_text= category_text,
-        )
-        return render(request, 'courses/kurslar.html', context)
-    except:
-        return HttpResponseNotFound("Yanlış kategori seçimi")
+def getCoursesByCategory(request, slug):
+    kurslar = Course.objects.filter(category__slug=slug, isActive=True)
+    kategoriler = Category.objects.all()
+
+    context = dict(
+        categories = kategoriler,
+        courses = kurslar,
+        seciliKategori = slug,
+    )
+    return render(request, 'courses/index.html', context)
 
 
-def getCoursesByCategoryId(request, category_id):
-    category_list = list(data.keys())
-    if (category_id > len(category_list)):
-        return HttpResponseNotFound("Yanlış Kategori Seçimi")
-    category_name = category_list[category_id - 1]
+# def getCoursesByCategoryId(request, category_id):
+#     category_list = list(data.keys())
+#     if (category_id > len(category_list)):
+#         return HttpResponseNotFound("Yanlış Kategori Seçimi")
+#     category_name = category_list[category_id - 1]
 
-    redirect_url = reverse('courses_by_category', args=[category_name])
+#     redirect_url = reverse('courses_by_category', args=[category_name])
 
-    return redirect(redirect_url)
+#     return redirect(redirect_url)
