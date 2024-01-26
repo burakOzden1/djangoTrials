@@ -9,18 +9,23 @@ class CourseAdmin(admin.ModelAdmin):
         "title", 
         "isActive",
         "slug",
+        "category",
     )
 
     list_display_links = (
         "title",
     )
 
-    readonly_fields = (
-        "slug",
-    )
+    # readonly_fields = (
+    #     "slug",
+    # )
+
+    prepopulated_fields = {"slug": ("title",),}
+    # slug bilgisini title bilgisine gore otomatik olustur.
 
     list_filter = (
         "isActive",
+        "category",
     )
 
     list_editable = (
@@ -35,7 +40,13 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        "name", 
+        "slug", 
+    )
+
+    prepopulated_fields = {"slug": ("name",),}
+
 
 
 
