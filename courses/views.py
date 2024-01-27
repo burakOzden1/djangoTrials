@@ -86,14 +86,14 @@ def getCoursesByCategory(request, slug):
 
     paginator = Paginator(kurslar, 2) # her sayfada 2 adet kurs olsun
     page = request.GET.get("page", 1) # varsayilan olarak ilk sayfayi al
-    courses = paginator.get_page(page) # page sayfasindaki urun bilgilerini getir.
-    # print(paginator.count) # kurs sayisini verir.
-    # print(paginator.num_pages) # sayfa sayisini verir.
+    page_obj = paginator.page(page) # page sayfasindaki urun bilgilerini getir. # get_page yerine page de kullanabilirsin.
+    # print(page_obj.paginator.count) # kurs sayisini verir.
+    # print(page_obj.paginator.num_pages) # sayfa sayisini verir.
 
 
     context = dict(
         categories = kategoriler,
-        courses = courses,
+        page_obj = page_obj,
         seciliKategori = slug,
     )
     return render(request, 'courses/index.html', context)

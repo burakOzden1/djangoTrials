@@ -16,15 +16,18 @@
             </div>
             <div class="col-9">
                 
-                {% if courses|length == 0 %}
+                {% if page_obj.object_list|length == 0 %}
                     <div class="alert alert-warning">Kurs Bulunamadı.</div>
                 {% endif %}
 
-                {% for course in courses %}
+                {% for course in page_obj.object_list %}
                     {% if course.isActive %}
                         {% include 'courses/partials/_course.html' %}
                     {% endif %}
                 {% endfor %}
+
+                {% include "courses/partials/_pagination.html" %}
+
             </div>
         </div>
     </div>
