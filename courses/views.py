@@ -62,6 +62,26 @@ def index(request):
     return render(request, 'courses/index.html', context)
 
 
+def search(request):
+    if "q" in request.GET and request.GET["q"] != "":
+        q = request.GET["q"]
+        kurslar = Course.objects.filter(isActive=True, title__contains=q).order_by("date")
+        kategoriler = Category.objects.all()
+    else:
+        return redirect("/kurslar")
+    
+    paginator = Paginator(kurslar, 3)
+    page = request.GET.get("page", 1)
+    page_obj = paginator.page(page)
+
+
+    context = dict(
+        categories = kategoriler,
+        page_obj = page_obj,
+    )
+    return render(request, 'courses/list.html', context)
+
+
 def details(request, slug):
     # try:
     #     course = Course.objects.get(pk=kurs_id)
