@@ -80,7 +80,7 @@ def details(request, slug):
 #     return HttpResponse(f"{ category } kategorisindeki kurs listesi")
 
 def getCoursesByCategory(request, slug):
-    kurslar = Course.objects.filter(category__slug=slug, isActive=True)
+    kurslar = Course.objects.filter(categories__slug=slug, isActive=True)
     kategoriler = Category.objects.all()
 
     context = dict(

@@ -10,6 +10,7 @@ class CourseAdmin(admin.ModelAdmin):
         "isActive",
         "slug",
         # "category", # many to many iliskisi kurdugumuz icin bu satiri sildik.
+        "category_list", # model icerisinde yok ama bu class icerisinde olusturduk.
     )
 
     list_display_links = (
@@ -37,16 +38,27 @@ class CourseAdmin(admin.ModelAdmin):
         "description",
     )
 
+    def category_list(self, obj):
+        html = ""
+        for category in obj.categories.all():
+            html += category.name + ", "
+        return html
+    # kurs kategorilerinin admin paneldeki liste uzerinde gorunmesi icin boyle bir fonk yazdik.
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         "name", 
         "slug", 
+        "course_count",
     )
 
     prepopulated_fields = {"slug": ("name",),}
 
+    def course_count(self, obj):
+        return obj.course_set.count()
+    # kategori kurslarinin admin paneldeki liste uzerinde gorunmesi icin boyle bir fonk yazdik.
 
 
 
