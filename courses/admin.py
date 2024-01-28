@@ -8,6 +8,7 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = (
         "title", 
         "isActive",
+        "isHome",
         "slug",
         # "category", # many to many iliskisi kurdugumuz icin bu satiri sildik.
         "category_list", # model icerisinde yok ama bu class icerisinde olusturduk.
@@ -26,11 +27,13 @@ class CourseAdmin(admin.ModelAdmin):
 
     list_filter = (
         "isActive",
+        "isHome",
         # "category", # many to many iliskisi kurdugumuz icin bu satiri sildik.
     )
 
     list_editable = (
         "isActive",
+        "isHome",
     )
 
     search_fields = (

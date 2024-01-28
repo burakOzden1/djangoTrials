@@ -52,7 +52,7 @@ from django.core.paginator import Paginator
 
 
 def index(request):
-    kurslar = Course.objects.filter(isActive=1)
+    kurslar = Course.objects.filter(isActive=1, isHome=1)
 
     kategoriler = Category.objects.all()
     context = dict(
@@ -69,17 +69,12 @@ def search(request):
         kategoriler = Category.objects.all()
     else:
         return redirect("/kurslar")
-    
-    paginator = Paginator(kurslar, 3)
-    page = request.GET.get("page", 1)
-    page_obj = paginator.page(page)
-
 
     context = dict(
         categories = kategoriler,
-        page_obj = page_obj,
+        courses = kurslar,
     )
-    return render(request, 'courses/list.html', context)
+    return render(request, 'courses/search.html', context)
 
 
 def details(request, slug):
@@ -116,7 +111,7 @@ def getCoursesByCategory(request, slug):
         page_obj = page_obj,
         seciliKategori = slug,
     )
-    return render(request, 'courses/index.html', context)
+    return render(request, 'courses/list.html', context)
 
 
 # def getCoursesByCategoryId(request, category_id):
