@@ -62,6 +62,39 @@ def index(request):
     return render(request, 'courses/index.html', context)
 
 def create_course(request):
+    if request.method == "POST":
+        title = request.POST["title"]
+        description = request.POST["description"]
+        imageUrl = request.POST["imageUrl"]
+        slug = request.POST["slug"]
+        isActive = request.POST.get("isActive", False)
+        isHome = request.POST.get("isHome", False)
+
+        if isActive == "on":
+            isActive = True
+
+        if isHome == "on":
+            isHome = True
+
+        # form validation
+        error = False
+        msg = ""
+
+        if title == "":
+            error = True
+            msg += "Title zorunlu bir alandır."
+
+        if len(title) < 5:
+            error = True 
+            msg += "title için en az 5 karakter girmelisiniz."
+
+        if error:
+            return render(request, "course/create-course.html", { "error": True, "msg": msg })
+        # form validation
+
+        kurs = Course(title=title, description=description, imageUrl=imageUrl, slug=slug, isActive=isActive, isHome=isHome)
+        kurs.save()
+        return redirect("/kurs")
     return render(request, "courses/create-course.html")
 
 
