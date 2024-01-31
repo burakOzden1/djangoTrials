@@ -73,8 +73,8 @@ def create_course(request):
             )
             kurs.save()
             return redirect("/kurs")
-    
-    form = CourseCreateForm()
+    else:
+        form = CourseCreateForm()
     context = dict(
         form = form,
     )
