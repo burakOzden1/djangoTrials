@@ -61,8 +61,20 @@ def index(request):
     return render(request, 'courses/index.html', context)
 
 def create_course(request):
-    form = CourseCreateForm()
+    if request.method == "POST":
+        form = CourseCreateForm(request.POST)
 
+        if form.is_valid():
+            kurs = Course(
+                title = form.cleaned_data["title"],
+                description = form.cleaned_data["description"],
+                imageUrl = form.cleaned_data["imageUrl"],
+                slug = form.cleaned_data["slug"],
+            )
+            kurs.save()
+            return redirect("/kurs")
+    
+    form = CourseCreateForm()
     context = dict(
         form = form,
     )
