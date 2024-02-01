@@ -19,7 +19,27 @@
                 {% endif %}
                 <form action="{% url 'create_course' %}" method="POST">
                     {% csrf_token %}
-                    {{ form.as_p }}
+
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.title.id_for_label }}">Title</label>
+                        {{ form.title }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.description.id_for_label }}">description</label>
+                        {{ form.description }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.imageUrl.id_for_label }}">imageUrl</label>
+                        {{ form.imageUrl }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.slug.id_for_label }}">slug</label>
+                        {{ form.slug }}
+                    </div>
+
                     <button class="btn btn-primary" type="submit">Kaydet</button>
                 </form>
             </div>
