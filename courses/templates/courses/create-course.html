@@ -20,26 +20,14 @@
                 <form action="{% url 'create_course' %}" method="POST">
                     {% csrf_token %}
 
-                    <div class="mb-3">
-                        <label class="form-label" for="{{ form.title.id_for_label }}">Title</label>
-                        {{ form.title }}
+                    {% for field in form %}
+                    <div class="mb-3" {% if field.errors %}invalid{% endif%}>
+                        {% if field.errors %}<div class="alert alert-danger">{{ field.errors }}</div>{% endif %}
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label}}</label>
+                        {{ field }}
                     </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="{{ form.description.id_for_label }}">description</label>
-                        {{ form.description }}
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="{{ form.imageUrl.id_for_label }}">imageUrl</label>
-                        {{ form.imageUrl }}
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="{{ form.slug.id_for_label }}">slug</label>
-                        {{ form.slug }}
-                    </div>
-
+                    {% endfor %}
+                    
                     <button class="btn btn-primary" type="submit">Kaydet</button>
                 </form>
             </div>
