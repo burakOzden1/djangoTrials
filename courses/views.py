@@ -74,6 +74,15 @@ def create_course(request):
     )
     return render(request, "courses/create-course.html", context)
 
+def course_list(request):
+    kurslar = Course.objects.all()
+    context = dict(
+        courses = kurslar,
+    )
+    return render(request, 'courses/course-list.html', context)
+
+def course_edit(request):
+    pass
 
 def search(request):
     if "q" in request.GET and request.GET["q"] != "":
