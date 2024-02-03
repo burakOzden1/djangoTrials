@@ -38,3 +38,31 @@ class CourseCreateForm(forms.ModelForm):
                 "required": "kurs açıklaması alanı zorunludur."
             }
         }
+    
+
+class CourseEditForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        # fields = '__all__'
+        fields = ('title', 'description', 'imageUrl', 'slug', "categories","isActive")
+        labels = {
+            'title':'Kurs Başlığı',
+            'description':'Açıklama',
+        },
+        widgets = {
+            "title": forms.TextInput(attrs={"class":"form-control"}),
+            "description": forms.Textarea(attrs={"class":"form-control"}),
+            "imageUrl": forms.TextInput(attrs={"class":"form-control"}),
+            "slug": forms.TextInput(attrs={"class":"form-control"}),
+            "categories": forms.SelectMultiple(attrs={"class":"form-control"}),
+            "isActive": forms.CheckboxInput()
+        }
+        error_messages = {
+            "title": {
+                "required": "kurs başlığı alanı zorunludur.",
+                "max_length": "maksimum 50 karakter girilebilir",
+            },
+            "description":{
+                "required": "kurs açıklaması alanı zorunludur."
+            }
+        }

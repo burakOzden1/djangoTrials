@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
 {% endblock %}
 
-{% block page_title %}Create Course{% endblock page_title %}
+{% block page_title %}Edit Course{% endblock page_title %}
 
 {% block content %}
 
@@ -17,7 +17,7 @@
                         {{ msg }}
                     </div>
                 {% endif %}
-                <form action="{% url 'create_course' %}" method="POST" novalidate>
+                <form method="POST" novalidate>
                     {% csrf_token %}
 
                     {% for field in form %}
