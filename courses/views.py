@@ -96,6 +96,20 @@ def course_edit(request, id):
     )
     return render(request, "courses/edit-course.html", context)
 
+def course_delete(request, id):
+    course = get_object_or_404(Course, pk=id)
+
+    if request.method == "POST":
+        # Course.objects.get(pk=id).delete() # (Course.objects.get(pk=id)) ifadesi course ifadesine esit oldugu icin asagidaki gibi duzenledik.
+        course.delete()
+        return redirect("course_list")
+
+    context = dict(
+        course = course,
+    )
+    return render(request, "courses/course-delete.html", context)
+
+
 
 def search(request):
     if "q" in request.GET and request.GET["q"] != "":
