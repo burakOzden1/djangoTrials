@@ -112,12 +112,13 @@ def course_delete(request, id):
 
 def upload(request):
     if request.method == "POST":
-        uploaded_image = request.FILES["image"]
+        uploaded_images = request.FILES.getlist("images")
         # print(uploaded_image)
         # print(uploaded_image.name)
         # print(uploaded_image.size)
         # print(uploaded_image.content_type)
-        handle_uploaded_files(uploaded_image)
+        for file in uploaded_images:
+            handle_uploaded_files(file)
         return render(request ,"courses/success.html")
     return render(request, "courses/upload.html")
 
