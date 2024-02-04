@@ -4,7 +4,8 @@ from .models import Course
 from .models import Category
 from django.core.paginator import Paginator
 from courses.forms import CourseCreateForm, CourseEditForm
-
+import random
+import os
 
 # data = {
 #     "programlama":"programlama kategorisine ait kurslar",
@@ -112,12 +113,21 @@ def course_delete(request, id):
 def upload(request):
     if request.method == "POST":
         uploaded_image = request.FILES["image"]
-        print(uploaded_image)
-        print(uploaded_image.name)
-        print(uploaded_image.size)
-        print(uploaded_image.content_type)
+        # print(uploaded_image)
+        # print(uploaded_image.name)
+        # print(uploaded_image.size)
+        # print(uploaded_image.content_type)
+        handle_uploaded_files(uploaded_image)
         return render(request ,"courses/success.html")
     return render(request, "courses/upload.html")
+
+def handle_uploaded_files(file):
+    number = random.randint(1, 99999)
+    filename, file_extention = os.path.splitext(file.name)
+    name = filename + "_" + str(number) + file_extention
+    with open("temp/" + name, "wb+") as destination:
+        for chunk in file.chunks():
+            destination.write(chunk)
 
 def search(request):
     if "q" in request.GET and request.GET["q"] != "":
