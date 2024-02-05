@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # MyApps:
     'courses',
     'pages',
+    'account',
 ]
 
 MIDDLEWARE = [
