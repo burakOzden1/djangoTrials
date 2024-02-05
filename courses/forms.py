@@ -66,3 +66,7 @@ class CourseEditForm(forms.ModelForm):
                 "required": "kurs açıklaması alanı zorunludur."
             }
         }
+
+
+class UploadForm(forms.Form):
+    image = forms.ImageField()

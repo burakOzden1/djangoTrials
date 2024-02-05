@@ -3,7 +3,7 @@ from django.urls import reverse
 from .models import Course
 from .models import Category
 from django.core.paginator import Paginator
-from courses.forms import CourseCreateForm, CourseEditForm
+from courses.forms import CourseCreateForm, CourseEditForm, UploadForm
 import random
 import os
 
@@ -112,15 +112,19 @@ def course_delete(request, id):
 
 def upload(request):
     if request.method == "POST":
-        uploaded_images = request.FILES.getlist("images")
-        # print(uploaded_image)
-        # print(uploaded_image.name)
-        # print(uploaded_image.size)
-        # print(uploaded_image.content_type)
-        for file in uploaded_images:
-            handle_uploaded_files(file)
-        return render(request ,"courses/success.html")
-    return render(request, "courses/upload.html")
+        form = UploadForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            uploaded_image = request.FILES["image"]
+            handle_uploaded_files(uploaded_image)
+            return render(request ,"courses/success.html")
+    else:
+        form = UploadForm()
+    
+    context = dict(
+        form = form,
+    )
+    return render(request, "courses/upload.html", context)
 
 def handle_uploaded_files(file):
     number = random.randint(1, 99999)
