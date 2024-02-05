@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Course
+from .models import Course, UploadModel
 from .models import Category
 from django.core.paginator import Paginator
 from courses.forms import CourseCreateForm, CourseEditForm, UploadForm
@@ -115,8 +115,8 @@ def upload(request):
         form = UploadForm(request.POST, request.FILES)
 
         if form.is_valid():
-            uploaded_image = request.FILES["image"]
-            handle_uploaded_files(uploaded_image)
+            model = UploadModel(image = request.FILES["image"])
+            model.save()
             return render(request ,"courses/success.html")
     else:
         form = UploadForm()
@@ -126,13 +126,6 @@ def upload(request):
     )
     return render(request, "courses/upload.html", context)
 
-def handle_uploaded_files(file):
-    number = random.randint(1, 99999)
-    filename, file_extention = os.path.splitext(file.name)
-    name = filename + "_" + str(number) + file_extention
-    with open("temp/" + name, "wb+") as destination:
-        for chunk in file.chunks():
-            destination.write(chunk)
 
 def search(request):
     if "q" in request.GET and request.GET["q"] != "":
