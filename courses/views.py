@@ -4,8 +4,7 @@ from .models import Course, UploadModel
 from .models import Category
 from django.core.paginator import Paginator
 from courses.forms import CourseCreateForm, CourseEditForm, UploadForm
-import random
-import os
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # data = {
 #     "programlama":"programlama kategorisine ait kurslar",
@@ -61,7 +60,14 @@ def index(request):
     )
     return render(request, 'courses/index.html', context)
 
+def isAdmin(user):
+    return user.is_superuser
+
+@user_passes_test(isAdmin)
 def create_course(request):
+    # if not request.user.is_superuser:
+    #     return redirect("index")
+    # Bu ifade yerine yukarida decorator kullandik
     if request.method == "POST":
         form = CourseCreateForm(request.POST, request.FILES)
 
@@ -75,7 +81,12 @@ def create_course(request):
     )
     return render(request, "courses/create-course.html", context)
 
+# @login_required() # settings.py dosyasinde bu ifadenin gidecegi konumu belirttik, varsayilan olarak kendisi oradan alıyor, bizim yazmamıza gerek yok. Bu ifade ile kullaninin uygulamamiza giris yapmasi yeterli ama biz asagidaki fonksiyona sadece superuser olan kullanicilari erisebilmesini istiyoruz. Bunu da:
+@user_passes_test(isAdmin) # ifadesi yapar.
 def course_list(request):
+    # if not request.user.is_superuser:
+    #     return redirect("index")
+    # Bu ifade yerine yukarida decorator kullandik
     kurslar = Course.objects.all()
     context = dict(
         courses = kurslar,
