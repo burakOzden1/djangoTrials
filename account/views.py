@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 
-from account.forms import LoginUserForm
+from account.forms import LoginUserForm, NewUserform
 from django.contrib.auth.forms import UserCreationForm
 
 def user_login(request):
@@ -37,7 +37,7 @@ def user_login(request):
 
 def user_register(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = NewUserform(request.POST)
 
         if form.is_valid():
             form.save()
@@ -54,7 +54,7 @@ def user_register(request):
             return render(request, "account/register.html", context)
 
     else:
-        form = UserCreationForm()
+        form = NewUserform()
         context = dict(
             form = form,
         )
