@@ -14,7 +14,7 @@
                     </a>
                 </h5>
 
-                <p class="card-text">{{ course.description|truncatewords:15 }}</p>
+                <p class="card-text">{{ course.subtitle }}</p>
                 {% comment "Bu alan veri tabanimizda olmadigi icin kaldirdik" %}
                 <span>
                     {% if course.isUpdated %}
